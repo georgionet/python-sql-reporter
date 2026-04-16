@@ -15,9 +15,10 @@ def build_connection_string(db_config):
     if engine_name.startswith("mssql"):
         driver = db_config.get("driver", "ODBC Driver 17 for SQL Server")
         port_str = f",{port}" if port else ""
+        trust = "yes" if "18" in driver else "no"
         return (
             f"mssql+pyodbc://{user}:{password}@{host}{port_str}/{database}"
-            f"?driver={driver}"
+            f"?driver={driver}&TrustServerCertificate={trust}"
         )
 
     port_str = f":{port}" if port else ""
