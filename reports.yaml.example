@@ -1,0 +1,38 @@
+databases:
+  produccion:
+    engine: mssql+pyodbc
+    host: localhost
+    port: 1433
+    database: mydb
+    user: sa
+    password: "tu_password"
+    driver: "ODBC Driver 17 for SQL Server"
+
+  mysql_local:
+    engine: mysql+pymysql
+    host: localhost
+    port: 3306
+    database: testdb
+    user: root
+    password: "tu_password"
+
+  sqlite_demo:
+    engine: sqlite
+    database: demo.db
+
+queries:
+  ventas_mes:
+    database: sqlite_demo
+    sql: >
+      SELECT * FROM ventas
+      WHERE fecha >= :fecha_inicio
+    params:
+      fecha_inicio: "2026-01-01"
+    sheet_name: "Ventas del Mes"
+
+  stock_actual:
+    database: sqlite_demo
+    sql: >
+      SELECT producto, cantidad FROM stock
+      ORDER BY producto
+    sheet_name: "Stock"

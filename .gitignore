@@ -1,0 +1,6 @@
+reports.yaml
+*.xlsx
+__pycache__/
+*.pyc
+.env
+*.db
